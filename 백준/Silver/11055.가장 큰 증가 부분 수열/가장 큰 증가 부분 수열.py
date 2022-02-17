@@ -1,11 +1,6 @@
 n = int(input())
 array = list(map(int, input().split()))
-dp = [0] * n
-M = 0
+dp = [0] * 1001
 for i in range(n):
-    dp[i] = array[i]
-    for j in range(i):
-        if array[j] < array[i]:
-            dp[i] = max(dp[i], dp[j] + array[i])
-    M = max(M, dp[i])
-print(M)
+    dp[array[i]] = max(dp[:array[i]]) + array[i]
+print(max(dp))
