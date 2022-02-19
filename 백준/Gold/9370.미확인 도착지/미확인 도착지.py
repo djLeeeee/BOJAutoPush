@@ -2,9 +2,9 @@
 # 간만에 골2 문제
 
 from sys import stdin as s
+from math import inf
 import heapq
 
-inff = int(1e9)
 for _ in range(int(s.readline())):
     n, m, t = map(int, s.readline().split())
     start, g, h = map(int, s.readline().split())
@@ -16,7 +16,7 @@ for _ in range(int(s.readline())):
     arrivals = [int(s.readline()) for _ in range(t)]
     target = {(g, h), (h, g)}
     passed = [False] * (n + 1)
-    distance = [inff] * (n + 1)
+    distance = [inf] * (n + 1)
     distance[start] = 0
     heap = [(0, start, False)]
     while heap:
