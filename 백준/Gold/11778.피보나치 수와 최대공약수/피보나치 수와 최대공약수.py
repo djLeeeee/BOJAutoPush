@@ -1,7 +1,5 @@
 from sys import stdin as s
-from sys import setrecursionlimit as st
 
-st(10 ** 9)
 p = 1000000007
 
 
@@ -16,10 +14,9 @@ def multiple(first, second):
 
 
 def gcd(a, b):
-    a, b = max(a, b), min(a, b)
-    if a % b == 0:
-        return b
-    return gcd(a - b, b)
+    while b:
+        a, b = b, a % b
+    return a
 
 
 n, m = map(int, s.readline().split())
