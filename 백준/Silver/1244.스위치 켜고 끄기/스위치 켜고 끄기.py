@@ -1,27 +1,25 @@
-from sys import stdin as s
+num = int(input())
+switch = list(map(int, input().split()))
+student = int(input())
 
-n = int(s.readline())
-switch = [int(i) for i in s.readline().split()]
-b = int(s.readline())
+for _ in range(student):
+    s, n = map(int, input().split())
+    if s == 1:
+        for i in range(n - 1, num, n):
+            switch[i] = int(not switch[i])
+    elif s == 2:
+        switch[n - 1] = int(not switch[n - 1])
+        if min(num - n, n - 1) == 1 and (switch[(n - 1) - 1] == switch[(n - 1) + 1]):
+            switch[(n - 1) - 1] = int(not (switch[(n - 1) - 1]))
+            switch[(n - 1) + 1] = int(not (switch[(n - 1) + 1]))
+        else:
+            for i in range(1, min(num - n + 1, n)):
+                if switch[(n - 1) - i] == switch[(n - 1) + i]:
+                    switch[(n - 1) - i] = int(not (switch[(n - 1) - i]))
+                    switch[(n - 1) + i] = int(not (switch[(n - 1) + i]))
+                else:
+                    break
 
-for _ in range(b):
-    gender, num = map(int, s.readline().split())
-    if gender == 1:
-        x = num
-        while num <= n:
-            switch[num - 1] = 1 - switch[num - 1]
-            num += x
-    else:
-        i = 0
-        while switch[num - i - 1] == switch[num + i - 1]:
-            i += 1
-            if num - i - 1 < 0 or num + i - 1 > n - 1:
-                break
-        for j in range(num - i, num + i - 1):
-            switch[j] = 1 - switch[j]
-
-for i in range(n):
-    if (i + 1) % 20 == 0:
-        print(switch[i])
-    else:
-        print(switch[i], end = ' ')
+while switch:
+    print(*switch[:20])
+    switch = switch[20:]
