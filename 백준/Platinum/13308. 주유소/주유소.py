@@ -26,16 +26,6 @@ while starts:
         break
     if total > ans[now][oil]:
         continue
-    flag = False
-    if check[now]:
-        for t, o in check[now]:
-            if t >= total and o >= oil:
-                flag = True
-                break
-    else:
-        check[now].append((total, oil))
-    if flag:
-        continue
     oil = min(oil, oil_rate[now])
     for adj in graph[now]:
         if oil * graph[now][adj] + total < ans[adj][oil]:
