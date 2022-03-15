@@ -36,15 +36,12 @@ for x, y in edges:
         union(parents, x, y)
 q = int(input())
 query = [tuple(map(int, input().split())) for _ in range(q)]
-query_set = {transform(*qq) for qq in query}
 parents_dict = defaultdict(dict)
 for x, y in edges:
-    if transform(x, y) in query_set:
-        parents_dict[transform(x, y)][find(parents, x)] = find(parents, x)
-        parents_dict[transform(x, y)][find(parents, y)] = find(parents, y)
+    parents_dict[transform(x, y)][find(parents, x)] = find(parents, x)
+    parents_dict[transform(x, y)][find(parents, y)] = find(parents, y)
 for x, y in edges:
-    if transform(x, y) in query_set:
-        union(parents_dict[transform(x, y)], find(parents, x), find(parents, y))
+    union(parents_dict[transform(x, y)], find(parents, x), find(parents, y))
 for x, y in query:
     result = '0'
     t = transform(x, y)
