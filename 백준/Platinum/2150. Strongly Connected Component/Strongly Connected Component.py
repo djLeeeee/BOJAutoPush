@@ -32,22 +32,21 @@ for _ in range(m):
     x, y = map(int, input().split())
     graph[x].append(y)
     graph_inv[y].append(x)
-scc = []
 visited = [False] * (n + 1)
+scc = []
 for i in range(1, n + 1):
-    stack = []
     if not visited[i]:
+        stack = []
         dfs(i)
         check = [False] * (n + 1)
         while stack:
-            component = []
             now = stack.pop()
             if not check[now]:
+                component = []
                 dfs_inv(now)
-                if component:
-                    component.sort()
-                    scc.append(component)
+                component.sort()
+                scc.append(component)
 scc.sort()
 print(len(scc))
 for c in scc:
-    print(*c, -1)
+    print(*c, '-1')
