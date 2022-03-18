@@ -41,10 +41,12 @@ for i in range(1, n + 1):
         check = [False] * (n + 1)
         while stack:
             component = []
-            dfs_inv(stack.pop())
-            if component:
-                component.sort()
-                scc.append(component)
+            now = stack.pop()
+            if not check[now]:
+                dfs_inv(now)
+                if component:
+                    component.sort()
+                    scc.append(component)
 scc.sort()
 print(len(scc))
 for c in scc:
