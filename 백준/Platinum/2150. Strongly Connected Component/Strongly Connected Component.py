@@ -36,14 +36,15 @@ scc = []
 visited = [False] * (n + 1)
 for i in range(1, n + 1):
     stack = []
-    dfs(i)
-    check = [False] * (n + 1)
-    while stack:
-        component = []
-        dfs_inv(stack.pop())
-        if component:
-            component.sort()
-            scc.append(component)
+    if not visited[i]:
+        dfs(i)
+        check = [False] * (n + 1)
+        while stack:
+            component = []
+            dfs_inv(stack.pop())
+            if component:
+                component.sort()
+                scc.append(component)
 scc.sort()
 print(len(scc))
 for c in scc:
