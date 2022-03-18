@@ -16,11 +16,11 @@ def dfs(idx):
 
 
 def dfs_inv(idx):
-    if check[idx] or not visited[idx]:
+    if not visited[idx]:
         return
-    check[idx] = True
+    visited[idx] = False
     for adj in graph_inv[idx]:
-        if not check[adj]:
+        if visited[adj]:
             dfs_inv(adj)
     component.append(idx)
 
@@ -34,18 +34,17 @@ for _ in range(m):
     graph_inv[y].append(x)
 visited = [False] * (n + 1)
 scc = []
+stack = []
 for i in range(1, n + 1):
     if not visited[i]:
-        stack = []
         dfs(i)
-        check = [False] * (n + 1)
-        while stack:
-            now = stack.pop()
-            if not check[now]:
-                component = []
-                dfs_inv(now)
-                component.sort()
-                scc.append(component)
+while stack:
+    now = stack.pop()
+    if visited[now]:
+        component = []
+        dfs_inv(now)
+        component.sort()
+        scc.append(component)
 scc.sort()
 print(len(scc))
 for c in scc:
