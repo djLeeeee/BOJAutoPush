@@ -16,13 +16,12 @@ def dfs(idx):
 
 
 def dfs_inv(idx):
-    if checked[idx]:
-        return
-    checked[idx] = True
-    for adj in graph_inv[idx]:
-        if not checked[adj]:
-            dfs_inv(adj)
     scc[idx] = component
+    for adj in graph_inv[idx]:
+        if not scc[adj]:
+            dfs_inv(adj)
+        elif scc[adj] != scc[idx]:
+            deg_scc[scc[idx]] = 1
 
 
 t = int(input())
@@ -40,22 +39,17 @@ for tc in range(t):
     for i in range(n):
         if not visited[i]:
             dfs(i)
-    checked = [False] * n
     component = 0
+    deg_scc = defaultdict(int)
     while stack:
         now = stack.pop()
-        if not checked[now]:
+        if not scc[now]:
             component += 1
             dfs_inv(now)
-    deg = [0] * (component + 1)
-    for i in graph:
-        for j in graph[i]:
-            if scc[i] != scc[j]:
-                deg[scc[j]] += 1
     start = []
-    for k in range(1, component + 1):
-        if deg[k] == 0:
-            start.append(k)
+    for i in range(1, component + 1):
+        if not deg_scc[i]:
+            start.append(i)
     if len(start) >= 2:
         print('Confused')
     else:
