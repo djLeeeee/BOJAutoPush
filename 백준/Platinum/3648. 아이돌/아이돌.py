@@ -29,7 +29,7 @@ def dfs_inv(idx):
 while True:
     try:
         n, m = map(int, input().split())
-    except:
+    except ValueError:
         break
     graph = defaultdict(list)
     graph_inv = defaultdict(list)
