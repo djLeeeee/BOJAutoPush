@@ -1,5 +1,4 @@
 from sys import stdin, setrecursionlimit
-from collections import defaultdict as dd
 
 input = stdin.readline
 setrecursionlimit(10 ** 5)
@@ -26,7 +25,7 @@ while True:
     if n == m == 0:
         break
     parents = list(range(n + 1))
-    mass = dd(int)
+    mass = [0] * (n + 1)
     for _ in range(m):
         order, *nums = input().strip().split()
         nums = [int(num) for num in nums]
