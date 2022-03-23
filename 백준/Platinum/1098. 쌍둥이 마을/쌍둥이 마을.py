@@ -15,7 +15,6 @@ for i in range(n - 1):
     for j in range(i + 1, n):
         if dist(town[i], town[j]) >= d:
             graph.append((dist(town[i], town[j]), 2 * i, 2 * j))
-graph.sort()
 t = 1 << 2 * n
 dp = [0] * t
 dp[0] = [0, 0]
