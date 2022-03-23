@@ -15,7 +15,7 @@ def dfs(v_idx, t_idx):
     else:
         team[v_idx] = t_idx
     for adj, value in graph[v_idx].items():
-        if value <= limit and team[v_idx] + team[adj]:
+        if value <= limit:
             dfs(adj, -t_idx)
 
 
