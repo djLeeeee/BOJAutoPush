@@ -42,9 +42,8 @@ if a % 2 == 0:
     a += 1
 ans = []
 for j in range(a, b + 1, 2):
-    if j % 3:
-        if prime_checker(j):
-            ans.append(j)
-    elif j == 3 or j == 9:
+    if prime_checker(j):
+        ans.append(j)
+    elif j == 9:
         ans.append(j)
 print(*ans)
