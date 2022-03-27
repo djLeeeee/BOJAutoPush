@@ -9,10 +9,6 @@ def add_edge(a, b):
     graph[b].append(a)
     graph[-a].append(-b)
     graph[-b].append(-a)
-    graph_inv[a].append(b)
-    graph_inv[b].append(a)
-    graph_inv[-a].append(-b)
-    graph_inv[-b].append(-a)
 
 
 def dfs(idx):
@@ -29,7 +25,7 @@ def dfs_inv(idx):
     if scc[idx]:
         return
     scc[idx] = component
-    for adj in graph_inv[idx]:
+    for adj in graph[idx]:
         if not scc[adj]:
             dfs_inv(adj)
 
@@ -49,7 +45,6 @@ for si in range(1, m + 1):
     for ri in room_idx:
         connection[ri].append(si)
 graph = [[] for _ in range(2 * m + 1)]
-graph_inv = [[] for _ in range(2 * m + 1)]
 for ri in range(1, n + 1):
     x, y = connection[ri]
     if on_off[ri]:
