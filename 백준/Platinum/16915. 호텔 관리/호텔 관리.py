@@ -15,17 +15,12 @@ def dfs(idx):
     if scc[idx]:
         return
     scc[idx] = component
+    if scc[-idx] == component:
+        print(0)
+        exit()
     for adj in graph[idx]:
         if not scc[adj]:
             dfs(adj)
-    stack.append(idx)
-
-
-def check(arr, l):
-    for j in range(1, l + 1):
-        if arr[j] == arr[-j]:
-            return 0
-    return 1
 
 
 n, m = map(int, input().split())
@@ -42,7 +37,6 @@ for ri in range(1, n + 1):
         add_edge(x, y)
     else:
         add_edge(x, -y)
-stack = []
 scc = [0] * (2 * m + 1)
 component = 0
 for i in range(1, m + 1):
@@ -52,4 +46,4 @@ for i in range(1, m + 1):
     if not scc[-i]:
         component += 1
         dfs(-i)
-print(check(scc, m))
+print(1)
