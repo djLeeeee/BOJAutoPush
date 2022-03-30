@@ -17,8 +17,6 @@ def draw_edge(nums):
         for b in range(a + 1, l):
             graph[nums[a]].append(-nums[b])
             graph[nums[b]].append(-nums[a])
-            graph_inv[-nums[a]].append(nums[b])
-            graph_inv[-nums[b]].append(nums[a])
     return True
 
 
@@ -40,9 +38,9 @@ def dfs_inv(idx):
     if scc[idx] == scc[-idx]:
         flag2 = False
         return
-    for adj in graph_inv[idx]:
-        if not scc[adj]:
-            dfs_inv(adj)
+    for adj in graph[-idx]:
+        if not scc[-adj]:
+            dfs_inv(-adj)
 
 
 dx = [-1, 0, 1, 0]
@@ -78,10 +76,8 @@ for _ in range(int(input())):
         print('NO')
         continue
     graph = [[] for _ in range(4 * bn + 1)]
-    graph_inv = [[] for _ in range(4 * bn + 1)]
     for k in nw:
         graph[k].append(-k)
-        graph_inv[-k].append(k)
     for value in white.values():
         draw_edge(value)
     del white
@@ -92,7 +88,6 @@ for _ in range(int(input())):
             dfs(i)
         if not visited[-i]:
             dfs(-i)
-    del graph
     scc = [0] * (4 * bn + 1)
     component = 0
     flag2 = True
