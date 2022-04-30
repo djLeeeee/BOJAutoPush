@@ -4,7 +4,7 @@ input = stdin.readline
 
 for _ in range(int(input())):
     n, m = map(int, input().split())
-    if m % 2 or n < m:
+    if m % 2:
         if n % 2:
             print(1)
         else:
