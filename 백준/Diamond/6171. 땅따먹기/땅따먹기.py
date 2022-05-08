@@ -15,9 +15,7 @@ while goods:
             real.pop()
             real.append(now)
 l = len(real)
-INF = float('inf')
-dp = [INF] * l
-dp[0] = 0
+dp = [0] * l
 CHT = [(0, 0)]
 for i in range(1, l):
     start = 0
