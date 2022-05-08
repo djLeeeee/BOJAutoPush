@@ -3,8 +3,7 @@ from sys import stdin
 input = stdin.readline
 
 n = int(input())
-goods = {tuple(map(int, input().split())) for _ in range(n)}
-goods = list(goods)
+goods = [tuple(map(int, input().split())) for _ in range(n)]
 goods.sort()
 real = [0, goods.pop()]
 while goods:
