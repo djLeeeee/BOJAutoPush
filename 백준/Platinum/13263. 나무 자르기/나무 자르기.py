@@ -19,16 +19,7 @@ for i in range(1, n):
             end = mid - 1
     dp[i] = dp[res] + c[res] * h[i]
     if i < n - 1:
-        start = 0
-        end = len(CHT) - 1
-        while start <= end:
-            mid = (start + end) // 2
-            s, idx = CHT[mid]
-            if dp[i] - dp[idx] > s * (c[idx] - c[i]):
-                res = mid
-                ns = (dp[i] - dp[idx]) / (c[idx] - c[i])
-                start = mid + 1
-            else:
-                end = mid - 1
-        CHT = CHT[:res + 1] + [(ns, i)]
+        while CHT[-1][0] >= (dp[i] - dp[CHT[-1][1]]) / (c[CHT[-1][1]] - c[i]):
+            CHT.pop()
+        CHT.append(((dp[i] - dp[CHT[-1][1]]) / (c[CHT[-1][1]] - c[i]), i))
 print(dp[-1])
