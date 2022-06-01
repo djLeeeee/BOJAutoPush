@@ -1,31 +1,27 @@
-from sys import stdin as s
-from sys import setrecursionlimit as st
+from sys import stdin
 
-input = s.readline
-st(10 ** 4)
+input = stdin.readline
 
 
-def dfs(start):
-    for adj in graph[start]:
-        if visited[adj]:
-            continue
-        visited[adj] = True
-        if match[adj] == 0 or dfs(match[adj]):
-            match[adj] = start
-            return True
-    return False
+def dfs(idx):
+    for adj in graph[idx]:
+        if not visited[adj]:
+            visited[adj] = True
+            if not match[adj] or dfs(match[adj]):
+                match[adj] = idx
+                return 1
+    return 0
 
 
 n, m = map(int, input().split())
-graph = [[]]
-for j in range(1, n + 1):
-    a = input()
-    if a == '0\n':
-        graph.append([])
-        continue
-    graph.append(list(map(int, a.split()))[1:])
+graph = [[] for _ in range(n + 1)]
+for i in range(1, n + 1):
+    _, *j = map(int, input().split())
+    graph[i] = j
 match = [0] * (m + 1)
+ans = 0
 for i in range(1, n + 1):
     visited = [False] * (m + 1)
-    dfs(i)
-print(sum([1 for j in match if j > 0]))
+    ans += dfs(i)
+print(ans)
+
