@@ -1,0 +1,1 @@
+print(sum(map(lambda n: int(n) ** 5, input())))
