@@ -1,8 +1,8 @@
-from sys import stdin
-from sys import setrecursionlimit as st
+from sys import stdin, setrecursionlimit
 
 input = stdin.readline
-st(10 ** 4)
+setrecursionlimit(10 ** 4)
+
 
 # 스톰
 def storm(level):
