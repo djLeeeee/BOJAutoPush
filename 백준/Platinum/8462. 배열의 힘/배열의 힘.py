@@ -22,36 +22,34 @@ for x, y in cnt.items():
     ans[idx] += y * y * x
 pa = ans[idx]
 for s, e, idx in queries[1:]:
-    change = {}
     if s < ps:
         for i in range(s, ps):
-            if arr[i] not in change:
-                change[arr[i]] = 1
+            if arr[i] not in cnt:
+                cnt[arr[i]] = 1
             else:
-                change[arr[i]] += 1
+                cnt[arr[i]] += 1
+            pa += arr[i] * (2 * cnt[arr[i]] - 1)
     elif s > ps:
         for i in range(ps, s):
-            if arr[i] not in change:
-                change[arr[i]] = -1
+            if arr[i] not in cnt:
+                cnt[arr[i]] = -1
             else:
-                change[arr[i]] -= 1
+                cnt[arr[i]] -= 1
+            pa -= arr[i] * (2 * cnt[arr[i]] + 1)
     if e > pe:
         for i in range(pe + 1, e + 1):
-            if arr[i] not in change:
-                change[arr[i]] = 1
+            if arr[i] not in cnt:
+                cnt[arr[i]] = 1
             else:
-                change[arr[i]] += 1
+                cnt[arr[i]] += 1
+            pa += arr[i] * (2 * cnt[arr[i]] - 1)
     elif e < pe:
         for i in range(e + 1, pe + 1):
-            if arr[i] not in change:
-                change[arr[i]] = -1
+            if arr[i] not in cnt:
+                cnt[arr[i]] = -1
             else:
-                change[arr[i]] -= 1
-    for x, y in change.items():
-        if x not in cnt:
-            cnt[x] = 0
-        pa += x * (2 * y * cnt[x] + y * y)
-        cnt[x] += y
+                cnt[arr[i]] -= 1
+            pa -= arr[i] * (2 * cnt[arr[i]] + 1)
     ans[idx] = pa
     ps, pe = s, e
 print(*ans, sep='\n')
