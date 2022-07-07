@@ -10,11 +10,6 @@ def find(target):
     return parent[target]
 
 
-def union(a, b):
-    a, b = find(a), find(b)
-    parent[a] = b
-
-
 n, m = map(int, input().split())
 board = [input().strip() for _ in range(n)]
 parent = list(range(n * m))
@@ -27,8 +22,8 @@ for x in range(n):
         nx = x + dx[d[board[x][y]]]
         ny = y + dy[d[board[x][y]]]
         if 0 <= nx < n and 0 <= ny < m:
-            s, e = x * m + y, nx * m + ny
-            if find(s) != find(e):
+            s, e = find(x * m + y), find(nx * m + ny)
+            if s != e:
                 ans -= 1
-                union(s, e)
+                parent[s] = e
 print(ans)
