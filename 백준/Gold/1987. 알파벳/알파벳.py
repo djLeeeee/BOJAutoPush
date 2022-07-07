@@ -1,10 +1,10 @@
-from sys import stdin as s
+from sys import stdin
+
+input = stdin.readline
 
 
-r, c = map(int, s.readline().split())
-board = []
-for _ in range(r):
-    board.append(s.readline().rstrip())
+r, c = map(int, input().split())
+board = [input() for _ in range(r)]
 dx = [1, -1, 0, 0]
 dy = [0, 0, 1, -1]
 start = {(0, 0, board[0][0])}
