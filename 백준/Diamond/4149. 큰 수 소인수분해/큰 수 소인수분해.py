@@ -1,4 +1,3 @@
-from itertools import count
 from random import randrange
 from math import gcd
 
