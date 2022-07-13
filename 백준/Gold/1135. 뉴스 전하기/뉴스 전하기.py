@@ -13,6 +13,7 @@ def sol(idx):
 
 n = int(input())
 graph = [[] for _ in range(n + 1)]
-for i, j in enumerate(map(int, input().split())):
-    graph[j].append(i)
+arr = list(map(int, input().split()))
+for i in range(1, n):
+    graph[arr[i]].append(i)
 print(sol(0))
