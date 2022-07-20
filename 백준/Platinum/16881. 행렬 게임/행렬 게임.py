@@ -8,12 +8,9 @@ gn = 0
 for i in range(n):
     ex = 0
     for j in range(m - 1, -1, -1):
-        if not ex:
+        if board[i][j] > ex:
             ex = board[i][j]
         else:
-            if board[i][j] > ex:
-                ex = board[i][j]
-            else:
-                ex = board[i][j] - 1
+            ex = board[i][j] - 1
     gn ^= ex
 print("koosaga" if gn else "cubelover")
